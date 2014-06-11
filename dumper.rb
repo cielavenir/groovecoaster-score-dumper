@@ -46,7 +46,7 @@ music_list.each_with_index{|music,i|
 				output.print ','
 			end
 		else
-			output.print difficulty+': '
+			output.print difficulty+":\t"
 			if result=score[difficulty+'_result_data']
 				output.puts "#{result['score']}(#{result['rating']})\tMaxChain:#{result['max_chain']}\tAdlib:#{result['adlib']}\tNoMiss:#{result['no_miss']}回\tFullChain:#{result['full_chain']}回"
 			else
