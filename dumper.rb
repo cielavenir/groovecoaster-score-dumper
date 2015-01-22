@@ -3,6 +3,8 @@
 #GrooveCoaster Score Dumper
 #(C) @cielavenir under Fair License.
 
+raise 'Ruby 1.9+ required' if RUBY_VERSION<'1.9'
+
 require 'mechanize'
 require 'json'
 load 'conf.rb'
@@ -34,9 +36,10 @@ music_list.each_with_index{|music,i|
 	mech.get('https://mypage.groovecoaster.jp/sp/json/music_detail.php?music_id='+music['music_id'].to_s,[],'https://mypage.groovecoaster.jp/sp/')
 	score=JSON.parse(mech.page.body)['music_detail']
 	if CSV
-		output.print score['music_title']+','
+		output.print '"'+score['music_title'].tr('〜','～').gsub('"','""')+'",'
 	else
 		output.puts score['music_title']
+		#output.puts score['artist'] ### artist is required for database ###
 	end
 	['simple','normal','hard','extra'].each{|difficulty|
 		if CSV
@@ -48,7 +51,7 @@ music_list.each_with_index{|music,i|
 		else
 			output.print difficulty+":\t"
 			if result=score[difficulty+'_result_data']
-				output.puts "#{result['score']}(#{result['rating']})\tMaxChain:#{result['max_chain']}\tAdlib:#{result['adlib']}\tNoMiss:#{result['no_miss']}回\tFullChain:#{result['full_chain']}回"
+				output.puts "#{result['score']}(#{result['rating']})\tMaxChain:#{result['max_chain']}\tAdlib:#{result['adlib']}\tプレイ回数:#{result['play_count']}回\tNoMiss:#{result['no_miss']}回\tFullChain:#{result['full_chain']}回"
 			else
 				output.puts 'N/A'
 			end
