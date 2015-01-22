@@ -13,8 +13,8 @@ mech=Mechanize.new
 mech.user_agent="Mozilla/5.0"
 #login
 mech.get('https://mypage.groovecoaster.jp/')
-mech.page.forms[0].field_with({name:'nesysCardId'}).value=NESiCA
-mech.page.forms[0].field_with({name:'playerName'}).value=Player
+mech.page.forms[0].field_with({name:'nesicaCardId'}).value=NESiCA
+mech.page.forms[0].field_with({name:'password'}).value=Password
 mech.page.forms[0].submit
 if mech.page.forms.size>0
 	puts 'login failed. please check conf.rb.'

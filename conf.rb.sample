@@ -1,7 +1,7 @@
 #coding:utf-8
 #NESiCA ID
 NESiCA=''
-#プレイヤー名
-Player=''
+#NESiCA.net password
+Password=''
 #csv形式(true=csv、false=テキスト)
 CSV=false
